@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 app.get('/restart/mc', (req, res) => {
-    shell.exec('./minecraft_server.sh')
+    shell.exec('bash ./minecraft_server.sh &')
     return res.send(JSON.stringify({ result: "success" }));
 });
 
