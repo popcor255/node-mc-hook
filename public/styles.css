@@ -6,7 +6,7 @@
     --blue-transparent: rgba(92, 134, 255, 0);
     --dot: #fe5151;
     --dot-shadow: rgba(254, 81, 81, .3);
-    --smoke: rgba(247, 248, 255, .9);
+    --smoke: #f7f8ffe6;
     --rocket: #eef0fd;
     --rocket-shadow-left: #fff;
     --rocket-shadow-right: #d3d4ec;
@@ -24,6 +24,12 @@
     backface-visibility: hidden;
     text-decoration: none;
     color: var(--text);
+    background-color: Transparent;
+    background-repeat:no-repeat;
+    border: none;
+    cursor:pointer;
+    overflow: hidden;
+    outline:none;
 }
 .rocket-button:before {
     content: '';

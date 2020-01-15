@@ -3,28 +3,51 @@
 window.onload = function(){
     var d = 40;
     document.querySelectorAll('.rocket-button').forEach(function (elem) {
-    elem.querySelectorAll('.default, .success > div').forEach(function (text) {
-        charming(text);
-        text.querySelectorAll('span').forEach(function (span, i) {
-        span.innerHTML = span.textContent == ' ' ? '&nbsp;' : span.textContent;
-        span.style.setProperty('--d', i * d + 'ms');
-        span.style.setProperty('--ds', text.querySelectorAll('span').length * d - d - i * d + 'ms');
-        });
-    });
-    elem.addEventListener('click', function (e) {
-        e.preventDefault();
+      elem.querySelectorAll('.default, .success > div').forEach(function (text) {
+          charming(text);
+          text.querySelectorAll('span').forEach(function (span, i) {
+          span.innerHTML = span.textContent == ' ' ? '&nbsp;' : span.textContent;
+          span.style.setProperty('--d', i * d + 'ms');
+          span.style.setProperty('--ds', text.querySelectorAll('span').length * d - d - i * d + 'ms');
+          });
+      });
+      
+      elem.addEventListener('click', function (e) {
+          e.preventDefault();
 
-        if (elem.classList.contains('animated')) {
-        return;
-        }
+          if (elem.classList.contains('animated')) {
+          return;
+          }
 
-        elem.classList.add('animated');
-        elem.classList.toggle('live');
-        setTimeout(function () {
-        elem.classList.remove('animated');
-        }, 2400);
+          elem.classList.add('animated');
+          elem.classList.toggle('live');
+
+          setTimeout(function () {
+            req("/restart/mc");
+            elem.disabled = true;
+            elem.classList.remove('animated');
+          }, 2400);
+          
+      });
     });
-    });
+}
+
+function req(url){
+  var request = new XMLHttpRequest()
+
+  request.open('GET', url, true)
+  request.onload = function() {
+    // Begin accessing JSON data here
+    var data = JSON.parse(this.response)
+
+    if (request.status >= 200 && request.status < 400) {
+      console.log(data);
+    } else {
+      console.log('error')
+    }
+  }
+
+  request.send()
 }
 
 function charming(element) {
